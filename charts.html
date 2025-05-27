@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS Admin | Charts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            background: rgba(10, 26, 42, 0.7);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-box {
+            flex: 1;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="ks-logo">
+            <span class="ks">KS</span> KINGSTONE ADMIN
+        </div>
+        <nav>
+            <ul>
+                <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="active"><a href="charts.html"><i class="fas fa-chart-bar"></i> Charts</a></li>
+                <li><a href="data-tables.html"><i class="fas fa-table"></i> Data Tables</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div class="main-content">
+        <h1>Analytics Charts</h1>
+        
+        <div class="chart-container">
+            <h2>Monthly Revenue</h2>
+            <div class="chart-box">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-row">
+            <div class="chart-container">
+                <h2>User Signups</h2>
+                <div class="chart-box">
+                    <canvas id="signupsChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-container">
+                <h2>Traffic Sources</h2>
+                <div class="chart-box">
+                    <canvas id="trafficChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        // Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart');
+        new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Revenue in $',
+                    data: [12500, 19000, 15000, 18000, 22000, 24580],
+                    borderColor: 'var(--gold)',
+                    backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+        
+        // Signups Chart
+        const signupsCtx = document.getElementById('signupsChart');
+        new Chart(signupsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'New Users',
+                    data: [150, 220, 180, 210, 250, 190],
+                    backgroundColor: 'rgba(128, 0, 32, 0.7)',
+                    borderColor: 'var(--maroon)',
+                    borderWidth: 1
+                }]
+            }
+        });
+        
+        // Traffic Chart
+        const trafficCtx = document.getElementById('trafficChart');
+        new Chart(trafficCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Direct', 'Social', 'Email', 'Referral'],
+                datasets: [{
+                    data: [45, 25, 15, 15],
+                    backgroundColor: [
+                        'var(--gold)',
+                        'var(--maroon)',
+                        'var(--light)',
+                        'var(--dark-blue)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
